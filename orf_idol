@@ -1,0 +1,11 @@
+body {
+/* position: relative; */
+/*font-family:'Reimin Light',serif/*'Haruhi Gakuen'*/
+background-color: black;
+}
+
+#chara{
+position: fixed;
+}
+
+
