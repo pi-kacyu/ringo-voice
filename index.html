@@ -27,3 +27,45 @@
 
 
 </html>
+
+
+<script>
+	// グローバル変数宣言
+	var flag_charaPlay = false;
+
+	// 初期設定：待機モーションを表示、他の動画を非表示
+	function init() {
+		document.getElementById("charaRassera").style.display = "none";
+		document.getElementById("chara50").style.display = "none";
+		document.getElementById("charaOsusume").style.display = "none";
+		document.getElementById("charaShinano").style.display = "none";
+		document.getElementById("charaWait").style.display = "block"; // 待機モーションを表示
+	}
+
+	// 動画の再生と他の動画の非表示
+	function chara_action(action_name) {
+		var wait = document.getElementById("Wait");
+		var action = document.getElementById(action_name);
+		var chara_action = "chara" + action_name;
+
+		// 他の動画を非表示にする
+		init();
+
+		console.log(action_name);
+		flag_charaPlay = true;
+		wait.pause(); // 待機モーション停止
+		document.getElementById("charaWait").style.display = "none"; // 待機モーション非表示
+		document.getElementById(chara_action).style.display = "block"; // アクション動画表示
+
+		action.play();
+
+		// 動画再生終了後
+		action.addEventListener('ended', function () {
+			document.getElementById(chara_action).style.display = "none"; // アクション動画非表示
+			wait.currentTime = 0; // 待機モーションの再生位置をリセット
+			wait.play(); // 待機モーション再表示
+			document.getElementById("charaWait").style.display = "block"; // 待機モーション再表示
+			flag_charaPlay = false;
+		}, { once: true });
+	}
+</script> 
